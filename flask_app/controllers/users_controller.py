@@ -10,7 +10,8 @@ import os
 
 @app.route('/')
 def home():
-    user = User.get_by_id({"id": session["user_id"]})
+    user_obj = {"id": session["user_id"]}
+    user = User.get_by_id(user_obj)
     return render_template("index.html", user = user)
 
 @app.route('/one_gym')
