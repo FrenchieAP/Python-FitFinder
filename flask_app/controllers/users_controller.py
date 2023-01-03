@@ -103,5 +103,5 @@ def log_user():
 
 @app.route('/users/logout')
 def log_out_user():
-    del session[user]
+    del session['user_id']
     return redirect('/')
