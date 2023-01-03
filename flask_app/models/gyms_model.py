@@ -5,21 +5,12 @@ import re, requests
 
 class Gym:
     def __init__( self , data ):
-        # self.id = data['id']
+        
         self.name = data['name']
         self.formatted_address = data['formatted_address']
         self.photos = data['photos']
         self.rating = data['rating']
-        # self.url = data['url']
-        # self.photo_reference = data['photo_reference']
         self.place_id = data['place_id']
-
-    # @classmethod 
-    # def searching(cls, find, near):
-    #     query = f"{find} {near}"
-    #     r = requests.get(f"https://maps.googleapis.com/maps/api/place/textsearch/json?key=ApiKeyGoesHere&query={query}&type=gym")
-    #     result = r.json()
-    #     print(result)
 
     @classmethod
     def get_results(cls, find, near):
