@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+    <title>Fit Finder</title>
+    <script>
+        function clearInput(input) {
+            if (input.value === input.defaultValue) {
+                input.value = "";
+            }
+
+            // Add event listener to restore default value if input field is empty
+            document.addEventListener("click", function (event) {
+                if (event.target !== input && input.value === "") {
+                    input.value = input.defaultValue;
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="nav1">
+        <a id="logo" href="http://localhost:5000"> <h1><span class="red fit">Fit</span>Finder</h1></a>
+        <h4 style="margin: 15px 5px 0px 15px">Hello, <span class="red">{{user.first_name}}!</span></h4>
+        <form action='/searching' method="POST">
+            <input type="search" name="find" value="yoga, gym, dance, spin class" class="grey input search3" onfocus="clearInput(this)">
+            <input type="search" name="near" value="Downtown, Seattle, WA" class="grey input search4" onfocus="clearInput(this)">
+            <button class="search_btn2"><img src="{{ url_for('static', filename='search.png') }}"></button>
+        </form>
+        <div class="log2">
+            <a id="logo" href="http://localhost:5000/login" style="border: transparent; background-color: white; margin-bottom: 70px;"><h4>Log In</h4></a>
+            <a id="logo" href="http://localhost:5000/reg"><h4>Sign Up</h4></a>
+        </div>
+    </div>
+
+    <table style="margin: 50px 0px 0px 175px; max-width: 75%; " class="one_gym table table-striped">
+        <thead class="purple thead-dark">
+            <tr>
+                <th style="color: white;">Favorite Gyms</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for favorite in fav_list %} 
+            <tr>
+                <td style="padding-top: 50px; display: flex; justify-content: space-between;"><a href="/gym/{{favorite.place_id}}" style="text-decoration: none;">{{favorite.name}}</a>
+                    <form method="POST" action="/favorite/delete/{{ favorite.place_id }}">
+                        <button class="btn btn-danger" style="width: 200px;" type="submit">Delete this gym</button>
+                    </form>
+                </td>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>  
+</h1>
+</body>
+</html>

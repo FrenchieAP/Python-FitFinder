@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Fit Finder</title>
+    <script>
+        function clearInput(input) {
+            if (input.value === input.defaultValue) {
+                input.value = "";
+            }
+
+            // Add event listener to restore default value if input field is empty
+            document.addEventListener("click", function (event) {
+                if (event.target !== input && input.value === "") {
+                    input.value = input.defaultValue;
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div class="nav1">
+        <a id="logo" href="http://localhost:5000"> <h1><span class="red fit">Fit</span>Finder</h1></a>
+        <h4 style="margin: 15px 5px 0px 15px">Hello, <span class="red">{{user.first_name}}!</span></h4>
+        <form action='/searching' method="POST">
+            <input type="search" name="find" value="yoga, gym, dance, spin class" class="grey input search3" onfocus="clearInput(this)">
+            <input type="search" name="near" value="Downtown, Seattle, WA" class="grey input search4" onfocus="clearInput(this)">
+            <button class="search_btn2"><img src="{{ url_for('static', filename='search.png') }}"></button>
+        </form>
+        <div class="log2">
+            <a id="logo" href="http://localhost:5000/login" style="border: transparent; background-color: white; margin-bottom: 70px;"><h4>Log In</h4></a>
+            <a id="logo" href="http://localhost:5000/reg"><h4>Sign Up</h4></a>
+        </div>
+    </div>
+    </div>
+    <div class="container-fluid text-center">
+        <div class="row content">
+            <div class="col-sm-2 whitecol">
+
+            </div>
+            <div class="col-sm-8 text-left">
+                <h1>Search results for {{params.find}} in {{params.near}}</h1>
+                    <table class="table table-striped"  style=" margin-top: 50px;">
+                        <thead class="purple thead-dark">
+                            <tr>
+                                <th style="color: white;">Name</th>
+                                <th style="color: white;">Address</th>
+                                <th style="color: white;"></th>
+                                <th style="color: white;">URL</th>
+                                <th style="color: white;">Rating</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for gym in gym_list %} 
+                            <tr>
+                                <!-- <div id="results"> -->
+                                        <td style="padding-top: 50px;"><a href="/gym/{{gym.place_id}}" style="text-decoration: none;">{{gym.name}}</a>
+                                            <form action="/favorite" method="POST">
+                                                <input type="hidden" value="{{gym.place_id}}" name="place_id">
+                                                <input type="hidden" value="{{gym.name}}" name="name">
+                                                <button class="btn purple" style="margin-top: 25px; width: 200px;">Add to Favorites</button> </form></td>
+                                        <td style="padding-top: 50px;">{{gym.formatted_address}}</td>
+                                        <td><img style="width: 300px; height: 200px" src="{{gym.photos}}"></td>
+                                        <td>{{gym.url}}</td>
+                                        <td style="padding-top: 50px; font-weight: bolder;">{{gym.rating}} ★</td>
+                                    
+                                <!-- </div> -->
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <a href="/favorites" style="text-decoration: none;">Go to my favorites</a>
+                    </table> 
+            </div>
+            <div class="col-sm-2 whitecol">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div id="about">
+        </div>
+        <div id="discover">
+        </div>
+        <div id="forbiz">
+        </div>
+        <div id="support">
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
