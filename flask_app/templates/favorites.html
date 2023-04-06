@@ -24,7 +24,7 @@
 </head>
 <body>
     <div class="nav1">
-        <a id="logo" href="http://localhost:5000"> <h1><span class="red fit">Fit</span>Finder</h1></a>
+        <a id="logo" href="/"> <h1><span class="red fit">Fit</span>Finder</h1></a>
         <h4 style="margin: 15px 5px 0px 15px">Hello, <span class="red">{{user.first_name}}!</span></h4>
         <form action='/searching' method="POST">
             <input type="search" name="find" value="yoga, gym, dance, spin class" class="grey input search3" onfocus="clearInput(this)">
@@ -32,8 +32,8 @@
             <button class="search_btn2"><img src="{{ url_for('static', filename='search.png') }}"></button>
         </form>
         <div class="log2">
-            <a id="logo" href="http://localhost:5000/login" style="border: transparent; background-color: white; margin-bottom: 70px;"><h4>Log In</h4></a>
-            <a id="logo" href="http://localhost:5000/reg"><h4>Sign Up</h4></a>
+            <a id="logo" href="/login" style="border: transparent; background-color: white; margin-bottom: 70px;"><h4>Log In</h4></a>
+            <a id="logo" href="/reg"><h4>Sign Up</h4></a>
         </div>
     </div>
 
