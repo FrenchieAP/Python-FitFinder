@@ -1,3 +1,4 @@
+import os
 # a cursor is the object we use to interact with the database
 import pymysql.cursors
 # this class will give us an instance of a connection to our database
@@ -5,14 +6,13 @@ class MySQLConnection:
     def __init__(self, db):
         # change the user and password as needed
         # connection = pymysql.connect(host = 'localhost',
-        connection = pymysql.connect(host='host.docker.internal',
-                                    user = 'root', 
-                                    password = 'root', 
-                                    db = db,
-                                    charset = 'utf8mb4',
-                                    cursorclass = pymysql.cursors.DictCursor,
-                                    autocommit = True)
-        # establish the connection to the database
+        connection = pymysql.connect(host=os.environ['us-cdbr-east-06.cleardb.net'],
+                                    user=os.environ['b01220b0f40716'],
+                                    password=os.environ['d27cdf72'],
+                                    db=db,
+                                    charset='utf8mb4',
+                                    cursorclass=pymysql.cursors.DictCursor,
+                                    autocommit=True)
         self.connection = connection
     # the method to query the database
     def query_db(self, query, data=None):
