@@ -134,6 +134,12 @@ def log_out_user():
 
 @app.route('/test_db')
 def test_db():
-    query = "SELECT * FROM users;"
-    results = connectToMySQL(DATABASE).query_db(query)
-    return str(results)
+    try:
+        query = "SELECT * FROM users;"
+        results = connectToMySQL(DATABASE).query_db(query)
+        if results:
+            return jsonify(results)
+        else:
+            return "No data found or there's an issue with the query."
+    except Exception as e:
+        return f"Error: {str(e)}"
