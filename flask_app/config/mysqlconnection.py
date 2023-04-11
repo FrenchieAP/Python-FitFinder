@@ -6,14 +6,13 @@ class MySQLConnection:
     def __init__(self, db):
         # change the user and password as needed
         # connection = pymysql.connect(host = 'localhost',
-        connection = pymysql.connect(host=os.environ['us-cdbr-east-06.cleardb.net'],
-                                    user=os.environ['b01220b0f40716'],
-                                    password=os.environ['d27cdf72'],
+        connection = pymysql.connect(host=os.environ.get('DB_HOST'),
+                                    user=os.environ.get('DB_USER'),
+                                    password=os.environ.get('DB_PASSWORD'),
                                     db=db,
                                     charset='utf8mb4',
                                     cursorclass=pymysql.cursors.DictCursor,
                                     autocommit=True)
-        self.connection = connection
     # the method to query the database
     def query_db(self, query, data=None):
         with self.connection.cursor() as cursor:

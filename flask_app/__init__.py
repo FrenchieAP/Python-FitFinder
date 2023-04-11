@@ -1,5 +1,5 @@
 from flask import Flask
-from config import connectToMySQL
+from flask_app.config import connectToMySQL
 
 app = Flask(__name__)
 app.secret_key = "shhhhhh"
