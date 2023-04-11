@@ -131,3 +131,9 @@ def log_user():
 def log_out_user():
     del session['user_id']
     return redirect('/')
+
+@app.route('/test_db')
+def test_db():
+    query = "SELECT * FROM users;"
+    results = connectToMySQL(DATABASE).query_db(query)
+    return str(results)
