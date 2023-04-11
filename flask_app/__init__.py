@@ -1,6 +1,5 @@
 from flask import Flask
-from flask_app.config import connectToMySQL
-
+from flask_app.config.mysqlconnection import connectToMySQL
 app = Flask(__name__)
 app.secret_key = "shhhhhh"
 DATABASE = "heroku_1310f620a16f672"
