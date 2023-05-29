@@ -33,7 +33,7 @@ class MySQLConnection:
                 # UPDATE and DELETE queries will return nothing
                     self.connection.commit()
             except Exception as e:
-            # if the query fails the method will return FALSE
+            # if the query fails, the method will return FALSE
                 print("*********Something went wrong*********", e)
                 return False
             finally:
