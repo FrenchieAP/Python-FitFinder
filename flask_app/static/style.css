@@ -83,11 +83,15 @@ tbody {
     gap: 35px;
 }
 
-.log:hover {
+.log1:hover {
     transform: translateY(-5px); /* Move the button up a bit on hover */
 }
 
-.log2:hover {
+.log3:hover {
+    transform: translateY(-5px); /* Move the button up a bit on hover */
+}
+
+.log4:hover {
     transform: translateY(-5px); /* Move the button up a bit on hover */
 }
 
