@@ -2,13 +2,13 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app import DATABASE
 from flask import flash
 import re, requests
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
 
-load_dotenv()
+# load_dotenv()
 
-GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
-print(f"Google API Key: {GOOGLE_API_KEY}")
+# GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
+# print(f"Google API Key: {GOOGLE_API_KEY}")
 
 class Gym:
     def __init__( self , data ):
@@ -24,7 +24,7 @@ class Gym:
     @classmethod
     def get_results(cls, find, near):
         query = f"{find} {near}"
-        r = requests.get(f"https://maps.googleapis.com/maps/api/place/textsearch/json?key={GOOGLE_API_KEY}&query={query}&type=gym")
+        r = requests.get(f"https://maps.googleapis.com/maps/api/place/textsearch/json?key=AIzaSyBQMOQnqqPr_QUac8uC00J1ueX5jV3YjMc&query={query}&type=gym")
         result = r.json()
         gym_list = []
         print(result)
@@ -38,7 +38,7 @@ class Gym:
                 "place_id": gym["place_id"]
             }
             try: 
-                gym_info["photos"] = f'https://maps.googleapis.com/maps/api/place/photo?photoreference={gym["photos"][0]["photo_reference"]}&sensor=false&maxheight=200&maxwidth=300&key={GOOGLE_API_KEY}'
+                gym_info["photos"] = f'https://maps.googleapis.com/maps/api/place/photo?photoreference={gym["photos"][0]["photo_reference"]}&sensor=false&maxheight=200&maxwidth=300&key=AIzaSyBQMOQnqqPr_QUac8uC00J1ueX5jV3YjMc'
 
             except: 
                 gym_info["photos"] = "https://i.imgur.com/NO25iZV.png"
@@ -49,7 +49,7 @@ class Gym:
     
     @classmethod
     def get_by_place_id(cls, place_id):
-        r = requests.get(f"https://maps.googleapis.com/maps/api/place/details/json?place_id={place_id}&key={GOOGLE_API_KEY}")
+        r = requests.get(f"https://maps.googleapis.com/maps/api/place/details/json?place_id={place_id}&key=AIzaSyBQMOQnqqPr_QUac8uC00J1ueX5jV3YjMc")
         result = r.json()
         gym_info = {
             "name": result["result"]["name"],
@@ -61,7 +61,7 @@ class Gym:
             "place_id": result["result"]["place_id"]
         }
         try: 
-            gym_info["photos"] = f'https://maps.googleapis.com/maps/api/place/photo?photoreference={result["result"]["photos"][0]["photo_reference"]}&sensor=false&maxheight=200&maxwidth=300&key={GOOGLE_API_KEY}'
+            gym_info["photos"] = f'https://maps.googleapis.com/maps/api/place/photo?photoreference={result["result"]["photos"][0]["photo_reference"]}&sensor=false&maxheight=200&maxwidth=300&key=AIzaSyBQMOQnqqPr_QUac8uC00J1ueX5jV3YjMc'
 
         except: 
             gym_info["photos"] = "https://i.imgur.com/NO25iZV.png"
