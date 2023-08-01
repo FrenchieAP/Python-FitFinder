@@ -8,12 +8,12 @@ from flask_app.controllers import users_controller
 # Python assigns the name "__main__" to the script when the script is executed.
 # If the script is imported from another script, the script keeps its original name (e.g. flask_app).
 # Here we're saying, "if this script is run directly, then execute the following."
-if __name__ == "__main__": 
+# if __name__ == "__main__": 
     # Run the application.
     # The argument debug=True enables the debug mode of the Flask application. 
     # Debug mode is a feature that provides a debugger in the browser when an error occurs. 
     # It also ensures the server reloads itself whenever code is updated.
-    app.run(debug=True)
+    # app.run(debug=True)
 
         
 
