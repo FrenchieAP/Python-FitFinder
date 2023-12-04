@@ -12,6 +12,14 @@ print(f"Google API Key: {GOOGLE_API_KEY}")
 
 class Gym:
     def __init__( self , data ):
+        self.name = data['name']
+        self.formatted_address = data['formatted_address']
+        self.photos = data['photos']
+        self.rating = data['rating']
+        self.place_id = data['place_id']
+
+class Gym:
+    def __init__( self , data ):
         # self.id = data['id']
         self.name = data['name']
         self.formatted_address = data['formatted_address']
@@ -38,7 +46,7 @@ class Gym:
                 "place_id": gym["place_id"]
             }
             try: 
-                gym_info["photos"] = f'https://maps.googleapis.com/maps/api/place/photo?photoreference={gym["photos"][0]["photo_reference"]}&sensor=false&maxheight=200&maxwidth=300&key=AIzaSyBQMOQnqqPr_QUac8uC00J1ueX5jV3YjMc'
+                gym_info["photos"] = f'https://maps.googleapis.com/maps/api/place/photo?photoreference={gym["photos"][0]["photo_reference"]}&sensor=false&maxheight=200&maxwidth=300&key={GOOGLE_API_KEY}'
 
             except: 
                 gym_info["photos"] = "https://i.imgur.com/NO25iZV.png"
