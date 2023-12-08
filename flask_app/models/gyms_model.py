@@ -63,11 +63,13 @@ class Gym:
             "name": result["result"]["name"],
             "formatted_address": result["result"]["formatted_address"],
             "photos" : "No photos",
+        #The get method of dictionaries returns None if the key is not present in the dictionary, so if the rating key is not present in the response, the value of gym_info["rating"] will be None.
+        # "url" : result["result"]["url"],
             "rating" : result["result"].get("rating"), 
-            #The get method of dictionaries returns None if the key is not present in the dictionary, so if the rating key is not present in the response, the value of gym_info["rating"] will be None.
-            # "url" : result["result"]["url"],
             "place_id": result["result"]["place_id"]
         }
+        # Try to set the gym's photo URL using the first photo reference from the API response.
+        # If the photo reference is not available (e.g., key error), set a default image URL instead.
         try: 
             gym_info["photos"] = f'https://maps.googleapis.com/maps/api/place/photo?photoreference={result["result"]["photos"][0]["photo_reference"]}&sensor=false&maxheight=200&maxwidth=300&key={GOOGLE_API_KEY}'
 
