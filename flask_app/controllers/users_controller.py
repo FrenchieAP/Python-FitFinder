@@ -28,7 +28,9 @@ def home():
 def show_gym(place_id):
     gym = Gym.get_by_place_id(place_id)
     user = User.get_by_id({"id": session["user_id"]})
-    return render_template('one_gym.html', gym=gym, user=user)
+    user_id = session['user_id']
+    is_favorite = User.is_favorite(user_id, place_id)
+    return render_template('one_gym.html', gym=gym, user=user, is_favorite = is_favorite)
 
 @app.route('/reg')
 def register():

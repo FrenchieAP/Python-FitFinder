@@ -23,6 +23,13 @@ class User:
         query = "INSERT INTO favorites (users_id, name, place_id) VALUES (%(users_id)s, %(name)s, %(place_id)s);"
         result = connectToMySQL(DATABASE).query_db(query,data)
         return result
+    
+    @classmethod
+    def is_favorite(cls, user_id, place_id):
+        query = "SELECT * FROM favorites WHERE users_id = %(user_id)s AND place_id = %(place_id)s;"
+        data = {'user_id': user_id, 'place_id': place_id}
+        result = connectToMySQL(DATABASE).query_db(query, data)
+        return len(result) > 0
 
     @classmethod
     def get_all_favs(cls):

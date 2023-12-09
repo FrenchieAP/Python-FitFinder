@@ -52,11 +52,21 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="padding-top: 50px;">{{gym.name}}
-                            <form action="/favorite" method="POST">
-                                <input type="hidden" value="{{gym.place_id}}" name="place_id">
-                                <input type="hidden" value="{{gym.name}}" name="name">
-                                <button class="btn purple" style="margin-top: 25px; width: 200px;">Add to Favorites</button> </form></td>
+                        <td style="padding-top: 50px;">
+                            {{ gym.name }}
+                            {% if is_favorite %}
+                                <form action="/favorite/delete/{{ gym.place_id }}" method="POST">
+                                    <input type="hidden" value="{{ gym.place_id }}" name="place_id">
+                                    <button class="btn purple" style="margin-top: 25px; width: 200px;">Remove from Favorites</button>
+                                </form>
+                            {% else %}
+                                <form action="/favorite" method="POST">
+                                    <input type="hidden" value="{{ gym.place_id }}" name="place_id">
+                                    <input type="hidden" value="{{ gym.name }}" name="name">
+                                    <button class="btn purple" style="margin-top: 25px; width: 200px;">Add to Favorites</button>
+                                </form>
+                            {% endif %}
+                        </td>
                         <td style="padding-top: 50px;">{{gym.formatted_address}}</td>
                         <td><img style="width: 300px; height: 200px" src="{{gym.photos}}"></td>
                         <td>{{gym.url}}</td>
