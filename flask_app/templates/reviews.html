@@ -36,34 +36,45 @@
             <a class="log4" id="logo" href="/favorites" style="text-decoration: none;"><h4>Favorites</h4></a>
         </div>
     </div>
-    <table style="margin: 50px 0px 0px 175px; max-width: 75%; " class="one_gym table table-striped">
+    <!-- Display reviews -->
+    <table style="margin: 50px 0px 0px 175px; max-width: 75%;" class="one_gym table table-striped">
         <thead class="purple thead-dark">
             <tr>
-                <th style="color: white;">Reviewed Gyms</th>
+                <th style="color: white;">{{user.first_name}}'s Reviews</th>
+                <th style="color: white;">Rating</th>
+                <th style="color: white;">Comment</th>
+                <th style="color: white;">Date</th>
+                <th style="color: white;"></th> <!-- Header for the delete button -->
             </tr>
         </thead>
         <tbody>
             {% for review in reviews %}
             <tr>
-                <td style="padding-top: 50px; display: flex; justify-content: space-between;"><a href="/gym/{{review.review_id}}" style="text-decoration: none;">"{{review.name}}"</a>
+                <!-- Gym Name -->
+                <td style="padding-top: 50px;">
+                    <a href="/gym/{{review.place_id}}" style="text-decoration: none;">{{review.name}}</a>
+                </td>
+        
+                <!-- Rating -->
+                <td style="padding-top: 50px;">Rating: {{ review.rating }}</td>
+        
+                <!-- Comment -->
+                <td style="padding-top: 50px;">{{ review.comment }}</td>
+
+                <!-- Date -->
+                <td style="padding-top: 50px;">{{ review.created_at }}</td>
+    
+                <!-- Delete Button -->
+                <td style="padding-top: 50px; text-align: right;">
                     <form method="POST" action="/review/delete/{{ review.review_id }}">
-                        <button class="btn btn-danger" style="width: 200px; margin-bottom: 1px;" type="submit">Remove</button>
+                        <button class="btn btn-danger" type="submit" style="width: 100px; margin-bottom: 25px;">Remove</button>
                     </form>
                 </td>
-                
             </tr>
             {% endfor %}
         </tbody>
-    </table>  
-<!-- Display reviews -->
-{% for review in reviews %}
-    <div class="review">
-        <p>Rating: {{ review.rating }}</p>
-        <p>{{ review.comment }}</p>
-        <p>Reviewed on: {{ review.created_at }}</p>
-        <!-- Additional review details -->
-    </div>
-{% endfor %}
+    </table>
+    
 </body>
 </html>
 

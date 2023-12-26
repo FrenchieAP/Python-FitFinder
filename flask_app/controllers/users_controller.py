@@ -114,6 +114,39 @@ def delete_favorite(place_id):
     connectToMySQL(DATABASE).query_db(query, data)
     return redirect("/favorites")
 
+@app.route('/review', methods=['POST'])
+def add_review():
+    data = {
+        'user_id' : session['user_id'],
+        'place_id' : request.form['place_id'],
+        'name' : request.form['name'],
+        'rating' : request.form['rating'],
+        'comment' : request.form['comment']
+    }
+    User.add_review(data)
+    print(request.form)
+    return redirect("/reviews")
+
+@app.route("/reviews")
+def all_reviews():
+    query = "SELECT * FROM reviews WHERE user_id = %(user_id)s;"
+    data = {'user_id': session['user_id']}
+    results = connectToMySQL(DATABASE).query_db(query,data)
+    user = User.get_by_id({"id": session["user_id"]})
+    return render_template("reviews.html", reviews=results, user=user)
+
+@app.route('/review/delete/<int:review_id>', methods=['POST'])
+def delete_review(review_id):
+    # Optional: Check if the current user is authorized to delete this review
+    # ...
+
+    # Call a method to delete the review
+    User.delete_review(review_id)
+
+    # Redirect to the reviews page or another appropriate page after deletion
+    return redirect("/reviews")
+    
+
 @app.route ('/users/login', methods=['POST'])
 def log_user():
     data = {

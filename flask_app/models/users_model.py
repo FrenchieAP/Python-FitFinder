@@ -41,6 +41,28 @@ class User:
         return favorites
     
     @classmethod
+    def add_review(cls,data):
+        query = "INSERT INTO reviews (user_id, place_id, name, rating, comment) VALUES (%(user_id)s, %(place_id)s, %(name)s, %(rating)s,%(comment)s);"
+        result = connectToMySQL(DATABASE).query_db(query,data)
+        return result
+    
+    @classmethod
+    def get_all_reviews(cls):
+        query = "SELECT * FROM reviews;"
+        results = connectToMySQL(DATABASE).query_db(query)
+        reviews = []
+        for review in reviews:
+            reviews.append( cls(review) )
+        return reviews
+    
+    @classmethod
+    def delete_review(cls, review_id):
+        query = "DELETE FROM reviews WHERE review_id = %(review_id)s;"
+        data = {'review_id': review_id}
+        result = connectToMySQL(DATABASE).query_db(query, data)
+        return result
+    
+    @classmethod
     def get_by_email(cls,data):
         query = "SELECT * FROM users WHERE email = %(email)s;"
         results = connectToMySQL(DATABASE).query_db(query,data)
