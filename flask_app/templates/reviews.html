@@ -32,40 +32,51 @@
             <button class="search_btn2"><img src="{{ url_for('static', filename='search.png') }}"></button>
         </form>
         <div class="log2">
-            <a class="log4" id="logo" href="/favorites" style="text-decoration: none;"><h4>Favorites</h4></a>
-            <a class="log4" id="logo" href="/reviews" style="text-decoration: none;"><h4>Reviews</h4></a>
             <a class="log1" id="logo" href="/users/logout" style="border: transparent; background-color: white; margin-bottom: 70px;"><h4>Log out</h4></a>
+            <a class="log4" id="logo" href="/favorites" style="text-decoration: none;"><h4>Favorites</h4></a>
         </div>
     </div>
-
-    <table style="margin: 50px 0px 0px 175px; max-width: 75%; " class="one_gym table table-striped">
+    <!-- Display reviews -->
+    <table style="margin: 50px 0px 0px 175px; max-width: 75%;" class="one_gym table table-striped">
         <thead class="purple thead-dark">
             <tr>
-                <th style="color: white;">Favorite Gyms</th>
+                <th style="color: white;">{{user.first_name}}'s Reviews</th>
+                <th style="color: white;">Rating</th>
+                <th style="color: white;">Comment</th>
+                <th style="color: white;">Date</th>
+                <th style="color: white;"></th> <!-- Header for the delete button -->
             </tr>
         </thead>
-        {% if fav_list|length == 0 %}
         <tbody>
+            {% for review in reviews %}
             <tr>
-                <td style="padding-top: 50px; display: flex; justify-content: space-between;"><p>No favorites yet. Start exploring gyms and add them to your favorites!</p>
+                <!-- Gym Name -->
+                <td style="padding-top: 50px;">
+                    <a href="/gym/{{review.place_id}}" style="text-decoration: none;">{{review.name}}</a>
                 </td>
-            </tr>
-        <p></p>
-            {% else %}
-        <tbody>
-            {% for favorite in fav_list %} 
-            <tr>
-                <td style="padding-top: 50px; display: flex; justify-content: space-between;"><a href="/gym/{{favorite.place_id}}" style="text-decoration: none;">{{favorite.name}}</a>
-                    <form method="POST" action="/favorite/delete/{{ favorite.place_id }}">
-                        <button class="btn btn-danger" style="width: 200px; margin-bottom: 1px;" type="submit">Remove</button>
+        
+                <!-- Rating -->
+                <td style="padding-top: 50px;">Rating: {{ review.rating }}</td>
+        
+                <!-- Comment -->
+                <td style="padding-top: 50px;">{{ review.comment }}</td>
+
+                <!-- Date -->
+                <td style="padding-top: 50px;">{{ review.created_at }}</td>
+    
+                <!-- Delete Button -->
+                <td style="padding-top: 50px; text-align: right;">
+                    <form method="POST" action="/review/delete/{{ review.review_id }}">
+                        <button class="btn btn-danger" type="submit" style="width: 100px; margin-bottom: 25px;">Remove</button>
                     </form>
                 </td>
-                
             </tr>
             {% endfor %}
         </tbody>
-        {% endif %}
-    </table>  
-</h1>
+    </table>
+    
 </body>
 </html>
+
+
+

@@ -32,8 +32,9 @@
             <button class="search_btn2"><img src="{{ url_for('static', filename='search.png') }}"></button>
         </form>
         <div class="log2">
-            <a class="log1" id="logo" href="/users/logout" style="border: transparent; background-color: white; margin-bottom: 70px;"><h4>Log out</h4></a>
             <a class="log4" id="logo" href="/favorites" style="text-decoration: none;"><h4>Favorites</h4></a>
+            <a class="log4" id="logo" href="/reviews" style="text-decoration: none;"><h4>Reviews</h4></a>
+            <a class="log1" id="logo" href="/users/logout" style="border: transparent; background-color: white; margin-bottom: 70px;"><h4>Log out</h4></a>
         </div>
     </div>
     <!-- <div class="header">
@@ -67,11 +68,28 @@
                                 </form>
                             {% endif %}
                         </td>
+
                         <td style="padding-top: 50px;">{{gym.formatted_address}}</td>
                         <td><img style="width: 300px; height: 200px" src="{{gym.photos}}"></td>
                         <td>{{gym.url}}</td>
                         <td style="padding-top: 50px; font-weight: bolder;">{{gym.rating}} ★</td>
-                            
+                        <td>   
+                            <form action="/review" method="POST">
+                                <input type="hidden" name="place_id" value="{{ gym.place_id }}">
+                                <input type="hidden" name="name" value="{{ gym.name }}">
+                                <label for="rating">Rating:</label>
+                                <select name="rating" id="rating">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                                <label for="comment">Comment:</label>
+                                <textarea name="comment" id="comment"></textarea>
+                                <button type="submit">Submit Review</button>
+                            </form>
+                        </td>
                     </tr>
                 </tbody>
             </table>  
