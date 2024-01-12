@@ -41,6 +41,13 @@
         <thead class="purple thead-dark">
             <tr>
                 <th style="color: white;">{{user.first_name}}'s Reviews</th>
+                {% if reviews|length == 0 %}
+                <tbody>
+                    <tr>
+                        <td style="padding-top: 50px; display: flex; justify-content: space-between;"><p>No reviews yet. Start exploring gyms and write some reviews!</p>
+                        </td>
+                    </tr>
+                    {% else %}
                 <th style="color: white;">Rating</th>
                 <th style="color: white;">Comment</th>
                 <th style="color: white;">Date</th>
@@ -74,6 +81,7 @@
             {% endfor %}
         </tbody>
     </table>
+    {% endif %}
     
 </body>
 </html>
