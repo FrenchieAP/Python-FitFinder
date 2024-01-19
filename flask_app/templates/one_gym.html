@@ -93,6 +93,21 @@
                     </tr>
                 </tbody>
             </table>  
+
+            <div>
+                <h3>Reviews</h3>
+                {% for review in reviews %}
+                    <div class="review">
+                        <p>Name: {{ review.user_id }} </p>
+                        <p>Rating: {{ review.rating }}</p>
+                        <p>Comment: {{ review.comment }}</p>
+                        <!-- Add more review details as needed -->
+                    </div>
+                {% else %}
+                    <p>No reviews yet.</p>
+                {% endfor %}
+            </div>
+
         <a href="/favorites" style="text-decoration: none;">Go to my favorites</a>
     </div>
     <div class="footer">

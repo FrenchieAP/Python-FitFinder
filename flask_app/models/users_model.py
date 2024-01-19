@@ -63,6 +63,14 @@ class User:
         return result
     
     @classmethod
+    def get_reviews_by_gym(cls, place_id):
+        query = "SELECT * FROM reviews WHERE place_id = %(place_id)s;"
+        data = {'place_id': place_id}
+        results = connectToMySQL(DATABASE).query_db(query, data)
+        return results
+
+    
+    @classmethod
     def get_by_email(cls,data):
         query = "SELECT * FROM users WHERE email = %(email)s;"
         results = connectToMySQL(DATABASE).query_db(query,data)
